@@ -20,6 +20,6 @@ def get_maze_path(contours, kernel):
 def build_output(image, solution):
     b, g, r = cv2.split(image)
     mask_inv = cv2.bitwise_not(solution)
-    r = cv2.bitwise_and(r, r, mask=mask_inv)
     b = cv2.bitwise_and(b, b, mask=mask_inv)
+    g = cv2.bitwise_and(g, g, mask=mask_inv)
     return cv2.merge((b, g, r))
