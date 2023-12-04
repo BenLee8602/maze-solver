@@ -1,23 +1,20 @@
 import sys
 import cv2
 
-from src import preprocess
+from src import preprocess, solve
 
 
-# maze solving pipeline
+# maze solver pipeline
 def solve_maze(image):
-    # preprocess
     bin = preprocess.binary_image(image)
     corners = preprocess.detect_maze(image)
     maze = preprocess.perspective_transform_maze(bin, corners)
     
-    # solve
-    pass
+    contours, kernel = solve.get_maze_contours(maze)
+    path = solve.get_maze_path(contours, kernel)
+    out = solve.build_output(image, path)
 
-    # display
-    pass
-
-    return image # temp
+    return out
 
 
 # solve maze in the given file(s)

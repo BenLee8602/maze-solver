@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 
 
-def binary_image(image, thres=200):
+# converts input image to binary
+def binary_image(image):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.GaussianBlur(image, (5, 5), 0)
     image = cv2.adaptiveThreshold(
@@ -14,6 +15,7 @@ def binary_image(image, thres=200):
     return image
 
 
+# returns the coordinates of the maze corners
 def detect_maze(image):
     edges = cv2.Canny(image, 50, 150)
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -38,6 +40,7 @@ def detect_maze(image):
     return np.float32([c[0] for c in largest_quad])
 
 
+# perspective transforms the image so the maze is completely straight
 def perspective_transform_maze(image, corners, dsize=400):
     if corners is None:
         return image
