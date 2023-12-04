@@ -17,6 +17,6 @@ run main.py
 - run with 1 or more maze image files or,
 - run with no args to use your camera
 ```
-py main.py img1.png img2.jpg img3.bmp ...
+py main.py test/5x5.png test/20x20.png test/50x50.png
 py main.py
 ```
